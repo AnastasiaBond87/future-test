@@ -9,7 +9,7 @@
     "lint": "eslint . --ext js,ts,tsx",
     "lint:fix": "eslint . --fix --ext js,ts,tsx",
     "preview": "vite preview",
-    "lint-staged": "lint-staged"
+    "lint-staged": "node node_modules/lint-staged/bin/lint-staged"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
