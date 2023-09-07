@@ -17,7 +17,7 @@ export default function SearchBar() {
 
   return (
     <form
-      className="w-[600px] max-w-full flex items-stretch p-3 bg-white/30 rounded-sm gap-2"
+      className="w-full flex items-stretch p-3 bg-white/30 rounded-sm gap-2"
       onSubmit={handleSubmit}
     >
       <div className="flex-1 relative flex items-center">
