@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body,
+html,
+#root {
+  @apply text-sm min-h-screen min-w-full;
+}
+
+#root {
+  @apply flex flex-col;
+}
+
+@layer components {
+  .container {
+    @apply my-0 mx-auto px-5 h-full w-full;
+  }
+}
