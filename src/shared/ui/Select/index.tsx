@@ -6,10 +6,11 @@ interface IProps {
   options: string[];
   value: string;
   label: string;
+  className?: string;
   setValue: (value: string) => void;
 }
 
-export default function Select({ options, value, setValue, id, label }: IProps) {
+export default function Select({ options, value, setValue, id, label, className = '' }: IProps) {
   const { ref, isOpen, setOpen } = useClickOutside<HTMLDivElement>();
 
   const handleOptionClick = (value: string): void => {
@@ -18,7 +19,7 @@ export default function Select({ options, value, setValue, id, label }: IProps) 
   };
 
   return (
-    <div className="relative">
+    <div className="relative max-w-max">
       <label
         htmlFor={id}
         className="capitalize text-base font-semibold text-teal-200 mb-[2px] italic"
@@ -29,7 +30,7 @@ export default function Select({ options, value, setValue, id, label }: IProps) 
         id={id}
         ref={ref}
         onClick={() => setOpen(!isOpen)}
-        className="w-52 h-8 py-1 px-2 bg-white rounded-sm flex items-center justify-between cursor-pointer"
+        className={`h-8 py-1 px-2 bg-white rounded-sm flex items-center justify-between cursor-pointer ${className}`}
       >
         <span className="text-base capitalize">{value}</span>
         <ArrowDownIcon
@@ -37,16 +38,18 @@ export default function Select({ options, value, setValue, id, label }: IProps) 
         />
       </div>
       <div
-        className={`absolute ${
+        className={`absolute z-10 ${
           isOpen ? 'h-auto' : 'h-0'
-        } overflow-hidden bg-black/70 w-full rounded-sm`}
+        } overflow-hidden bg-black/80 w-full rounded-sm`}
       >
-        <ul className="flex flex-col gap-1 p-2">
+        <ul className="flex flex-col py-1">
           {options.map((option) => (
             <li
               key={option}
               onClick={() => handleOptionClick(option)}
-              className="text-base text-white capitalize cursor-pointer hover:text-teal-400 duration-300"
+              className={`py-1 px-2 text-base capitalize cursor-pointer duration-300 ${
+                value === option ? 'text-teal-400' : 'text-white hover:bg-white/20'
+              }`}
             >
               {option}
             </li>

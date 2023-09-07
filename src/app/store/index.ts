@@ -1,6 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import selectSlice from '@/app/store/slices/selectSlice';
 
-const reducer = combineReducers({});
+const reducer = combineReducers({
+  [selectSlice.name]: selectSlice.reducer,
+});
 
 const store = configureStore({
   reducer,
