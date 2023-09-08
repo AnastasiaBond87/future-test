@@ -3,16 +3,21 @@ import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import Button from '@/shared/ui/Button';
 import SearchIcon from '@/shared/ui/Icons/SearchIcon';
 
-export default function SearchBar() {
-  const [inputVal, setInputVal] = useState('');
+interface IProps {
+  onSubmit: (value: string) => void;
+}
+
+export default function SearchBar({ onSubmit }: IProps) {
+  const [value, setValue] = useState('');
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const { value } = event.target;
-    setInputVal(value.trim());
+    setValue(value);
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+    onSubmit(value);
   };
 
   return (
@@ -21,7 +26,7 @@ export default function SearchBar() {
       onSubmit={handleSubmit}
     >
       <div className="flex-1 relative flex items-center">
-        <Input value={inputVal} onChange={handleChange} className="w-full h-full pr-9" />
+        <Input value={value} onChange={handleChange} className="w-full h-full pr-9" />
         <SearchIcon className="absolute right-2 h-5 w-5 text-neutral-400" />
       </div>
       <Button type="submit" size="md">

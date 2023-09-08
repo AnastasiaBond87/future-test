@@ -1,38 +1,32 @@
 import { categories, sortBy } from '@/shared/constants';
 import Select from '@/shared/ui/Select';
 import SearchBar from '@/components/SearchBar';
-import { useEffect } from 'react';
-import { useGetBooksQuery } from '@/app/store/api/booksApi';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
-import { setSorting, setCategory } from '@/app/store/slices/selectSlice';
+import { setSorting, setCategory, setQuery } from '@/app/store/slices/queryParamsSlice';
 
 export default function Header() {
   const dispatch = useAppDispatch();
-  const { sorting, category } = useAppSelector((store) => store.select);
-  const { data, error } = useGetBooksQuery({ q: 'anna' });
+  const { sorting, category } = useAppSelector((store) => store.params);
 
-  const selectSorting = (value: string) => {
+  const selectSorting = (value: string): void => {
     dispatch(setSorting(value));
   };
 
-  const selectCategory = (value: string) => {
+  const selectCategory = (value: string): void => {
     dispatch(setCategory(value));
   };
 
-  useEffect(() => {
-    if (data) {
-      console.log(data);
+  const handleRequest = (value: string): void => {
+    if (value) {
+      dispatch(setQuery(value));
     }
+  };
 
-    if (error) {
-      console.log(error);
-    }
-  }, [data, error]);
   return (
     <header className="bg-black bg-[url('assets/images/header-cover.jpg')] bg-cover">
       <div className="w-full h-full bg-black/50 py-6">
         <div className="container flex flex-col items-center justify-center gap-12 w-[600px] max-w-full">
-          <SearchBar />
+          <SearchBar onSubmit={handleRequest} />
           <div className="flex w-full gap-3 max-w-full">
             <Select
               options={categories}

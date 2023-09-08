@@ -1,19 +1,24 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface IState {
+  query: string;
   category: string;
   sorting: string;
 }
 
 const initialState: IState = {
+  query: '',
   category: 'all',
   sorting: 'relevance',
 };
 
-const selectSlice = createSlice({
-  name: 'select',
+const queryParamsSlice = createSlice({
+  name: 'params',
   initialState,
   reducers: {
+    setQuery(state, action: PayloadAction<string>) {
+      state.query = action.payload;
+    },
     setCategory(state, action: PayloadAction<string>) {
       state.category = action.payload;
     },
@@ -23,5 +28,5 @@ const selectSlice = createSlice({
   },
 });
 
-export const { setCategory, setSorting } = selectSlice.actions;
-export default selectSlice;
+export const { setCategory, setSorting, setQuery } = queryParamsSlice.actions;
+export default queryParamsSlice;

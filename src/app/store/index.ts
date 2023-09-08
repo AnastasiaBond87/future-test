@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import selectSlice from '@/app/store/slices/selectSlice';
+import queryParamsSlice from '@/app/store/slices/queryParamsSlice';
 import booksApi from '@/app/store/api/booksApi';
 
 const reducer = combineReducers({
-  [selectSlice.name]: selectSlice.reducer,
+  [queryParamsSlice.name]: queryParamsSlice.reducer,
   [booksApi.reducerPath]: booksApi.reducer,
 });
 
