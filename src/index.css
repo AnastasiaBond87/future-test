@@ -11,9 +11,3 @@ html,
 #root {
   @apply flex flex-col;
 }
-
-@layer components {
-  .container {
-    @apply my-0 mx-auto px-5 h-full w-full;
-  }
-}

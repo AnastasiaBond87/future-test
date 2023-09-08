@@ -2,7 +2,7 @@ interface IProps {
   className?: string;
 }
 
-export default function ArrowDownIcon({ className }: IProps) {
+export default function ArrowDownIcon({ className = '' }: IProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -1,8 +1,8 @@
 interface IProps {
-  className: string;
+  className?: string;
 }
 
-export default function SpinnerIcon({ className }: IProps) {
+export default function SpinnerIcon({ className = '' }: IProps) {
   return (
     <svg
       aria-hidden="true"

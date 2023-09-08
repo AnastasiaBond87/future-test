@@ -24,8 +24,8 @@ export default function Header() {
 
   return (
     <header className="bg-black bg-[url('assets/images/header-cover.jpg')] bg-cover">
-      <div className="w-full h-full bg-black/50 py-6">
-        <div className="container flex flex-col items-center justify-center gap-12 w-[600px] max-w-full">
+      <div className="w-full h-full bg-black/50 py-6 flex justify-center">
+        <div className="flex flex-col items-center justify-center gap-12 w-[600px] max-w-full px-5 xs:px-9">
           <SearchBar onSubmit={handleRequest} />
           <div className="flex w-full gap-3 max-w-full">
             <Select
