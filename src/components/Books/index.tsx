@@ -5,7 +5,7 @@ import { setStartIndex } from '@/app/store/slices/queryParamsSlice';
 import { fetchBooks } from '@/app/store/thunks/booksThunk';
 
 interface IProps {
-  totalItems: number;
+  totalItems: number | null;
   children: ReactNode;
 }
 
@@ -17,6 +17,10 @@ export default function Books({ totalItems, children }: IProps) {
     dispatch(setStartIndex(startIndex + +import.meta.env.VITE_BOOKS_LIMIT));
     dispatch(fetchBooks());
   };
+
+  if (!totalItems) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col gap-5">

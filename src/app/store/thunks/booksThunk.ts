@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 import { AppState } from '@/app/store';
-import { setLoading } from '@/app/store/slices/booksSlice';
+import { setBooks, setLoading } from '@/app/store/slices/booksSlice';
 
 const URL = import.meta.env.VITE_URL;
 const LIMIT = import.meta.env.VITE_BOOKS_LIMIT;
@@ -15,6 +15,7 @@ const fetchBooks = createAsyncThunk(
 
     if (startIndex === 0) {
       dispatch(setLoading(true));
+      dispatch(setBooks([]));
     }
 
     return axios

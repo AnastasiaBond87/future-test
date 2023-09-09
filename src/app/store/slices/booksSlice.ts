@@ -23,6 +23,9 @@ const booksSlice = createSlice({
     setLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
     },
+    setBooks(state, action: PayloadAction<IBook[]>) {
+      state.books = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchBooks.pending, (state) => {
@@ -31,7 +34,9 @@ const booksSlice = createSlice({
 
     builder.addCase(fetchBooks.fulfilled, (state, action: PayloadAction<IBooksResponse>) => {
       const { items } = action.payload;
-      state.books.push(...items);
+      if (items) {
+        state.books.push(...items);
+      }
       state.totalItems = action.payload.totalItems;
       state.isLoading = false;
     });
@@ -44,4 +49,4 @@ const booksSlice = createSlice({
 });
 
 export default booksSlice;
-export const { setLoading } = booksSlice.actions;
+export const { setLoading, setBooks } = booksSlice.actions;

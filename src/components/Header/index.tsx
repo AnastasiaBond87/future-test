@@ -2,7 +2,12 @@ import { categories, sortBy } from '@/shared/constants';
 import Select from '@/shared/ui/Select';
 import SearchBar from '@/components/SearchBar';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
-import { setSorting, setCategory, setQuery } from '@/app/store/slices/queryParamsSlice';
+import {
+  setSorting,
+  setCategory,
+  setQuery,
+  setStartIndex,
+} from '@/app/store/slices/queryParamsSlice';
 import { ChangeEventHandler } from 'react';
 import { fetchBooks } from '@/app/store/thunks/booksThunk';
 
@@ -19,6 +24,7 @@ export default function Header() {
   };
 
   const handleRequest = (): void => {
+    dispatch(setStartIndex(0));
     dispatch(fetchBooks());
   };
 
