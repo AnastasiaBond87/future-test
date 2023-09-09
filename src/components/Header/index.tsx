@@ -9,7 +9,7 @@ import {
   setStartIndex,
 } from '@/app/store/slices/queryParamsSlice';
 import { fetchBooks } from '@/app/store/thunks/booksThunk';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -35,7 +35,9 @@ export default function Header() {
     <header className="bg-black bg-[url('assets/images/header-cover.jpg')] bg-cover">
       <div className="w-full h-full bg-black/50 py-6 flex justify-center">
         <div className="flex flex-col items-center justify-center gap-12 w-[600px] max-w-full px-5 xs:px-9">
-          <h2 className="text-white uppercase font-bold text-3xl">Search for books</h2>
+          <h2 className="text-white uppercase font-bold text-3xl hover:text-neutral-100 duration-150">
+            <Link to="/">Search for books</Link>
+          </h2>
           <SearchBar onSubmit={handleRequest} />
           <div className="flex justify-center w-full gap-3 max-w-full">
             <Select
