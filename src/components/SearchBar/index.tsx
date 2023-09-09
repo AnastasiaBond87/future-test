@@ -1,22 +1,22 @@
 import Input from '@/shared/ui/Input';
-import { ChangeEventHandler, FormEventHandler } from 'react';
+import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import Button from '@/shared/ui/Button';
 import SearchIcon from '@/shared/ui/Icons/SearchIcon';
 import IconButton from '../../shared/ui/IconButton';
 import ClearIcon from '../../shared/ui/Icons/ClearIcon';
 
 interface IProps {
-  onSubmit: () => void;
-  setValue: (value: string) => void;
-  value: string;
+  onSubmit: (value: string) => void;
 }
 
-export default function SearchBar({ onSubmit, setValue, value }: IProps) {
+export default function SearchBar({ onSubmit }: IProps) {
+  const [value, setValue] = useState('');
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
     if (value.trim()) {
-      onSubmit();
+      onSubmit(value);
     }
   };
 

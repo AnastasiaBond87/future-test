@@ -12,7 +12,7 @@ import { fetchBooks } from '@/app/store/thunks/booksThunk';
 
 export default function Header() {
   const dispatch = useAppDispatch();
-  const { orderBy, category, query } = useAppSelector((store) => store.params);
+  const { orderBy, category } = useAppSelector((store) => store.params);
 
   const selectSorting = (value: string): void => {
     dispatch(setSorting(value));
@@ -22,13 +22,10 @@ export default function Header() {
     dispatch(setCategory(value));
   };
 
-  const handleRequest = (): void => {
+  const handleRequest = (value: string): void => {
+    dispatch(setQuery(value));
     dispatch(setStartIndex(0));
     dispatch(fetchBooks());
-  };
-
-  const setSearchValue = (value: string): void => {
-    dispatch(setQuery(value));
   };
 
   return (
@@ -36,7 +33,7 @@ export default function Header() {
       <div className="w-full h-full bg-black/50 py-6 flex justify-center">
         <div className="flex flex-col items-center justify-center gap-12 w-[600px] max-w-full px-5 xs:px-9">
           <h2 className="text-white uppercase font-bold text-3xl">Search for books</h2>
-          <SearchBar onSubmit={handleRequest} value={query} setValue={setSearchValue} />
+          <SearchBar onSubmit={handleRequest} />
           <div className="flex justify-center w-full gap-3 max-w-full">
             <Select
               options={categories}

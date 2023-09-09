@@ -11,7 +11,8 @@ const fetchBooks = createAsyncThunk(
   'books/fetchBooksStatus',
   async (_, { rejectWithValue, getState, dispatch }) => {
     const { params } = getState() as AppState;
-    const { orderBy, startIndex, query } = params;
+    const { orderBy, startIndex, query, category } = params;
+    const subject = category !== 'all' ? category : '';
 
     if (startIndex === 0) {
       dispatch(setLoading(true));
@@ -20,7 +21,7 @@ const fetchBooks = createAsyncThunk(
 
     return axios
       .get(
-        `${URL}?q=${query}&orderBy=${orderBy}&startIndex=${startIndex}&maxResults=${LIMIT}&key=${KEY}`
+        `${URL}?q=${query}+subject:${subject}&orderBy=${orderBy}&startIndex=${startIndex}&maxResults=${LIMIT}&key=${KEY}`
       )
       .then((res) => res.data)
       .catch((err: AxiosError) => {
