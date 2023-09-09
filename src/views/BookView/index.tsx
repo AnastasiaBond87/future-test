@@ -4,7 +4,8 @@ import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { fetchBookById } from '@/app/store/thunks/booksThunk';
 import BookDetails from '@/components/BookDetails';
 import NoData from '@/components/NoData';
-import SpinnerIcon from '../../shared/ui/Icons/SpinnerIcon';
+import SpinnerIcon from '@/shared/ui/Icons/SpinnerIcon';
+import { handleError } from '@/shared/utils/handleError';
 
 export default function BookView() {
   const dispatch = useAppDispatch();
@@ -16,6 +17,12 @@ export default function BookView() {
       dispatch(fetchBookById(id)).then((res) => res);
     }
   }, [id, dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      handleError(error);
+    }
+  }, [error]);
 
   return (
     <main className="flex-1 flex w-full items-center justify-center">

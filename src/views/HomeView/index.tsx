@@ -1,24 +1,17 @@
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
 import NoData from '@/components/NoData';
 import SpinnerIcon from '@/shared/ui/Icons/SpinnerIcon';
 import BookList from '@/components/BookCardList';
 import Books from '@/components/Books';
-import { useAppSelector } from '../../app/store/hooks';
-import { IError } from '../../shared/types/api.types';
+import { useAppSelector } from '@/app/store/hooks';
+import { handleError } from '@/shared/utils/handleError';
 
 export default function HomeView() {
   const { isLoading, error, books, totalItems } = useAppSelector((store) => store.books);
 
   useEffect(() => {
     if (error) {
-      const err = error as IError;
-
-      if (err.error.message) {
-        toast.error(err.error.message);
-      } else {
-        toast.error('UNKNOWN ERROR');
-      }
+      handleError(error);
     }
   }, [error]);
 
