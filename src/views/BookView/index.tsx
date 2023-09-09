@@ -26,7 +26,7 @@ export default function BookView() {
 
   return (
     <main className="flex-1 flex w-full items-center justify-center">
-      {book && <BookDetails book={book} />}
+      {book && book.volumeInfo && <BookDetails volumeInfo={book.volumeInfo} />}
       {error !== null && <NoData message="Book not found" />}
       {isLoading && <SpinnerIcon className="w-24 h-24 fill-teal-400" />}
     </main>
