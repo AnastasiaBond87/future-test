@@ -23,7 +23,7 @@ export default function HomeView() {
   }, [error]);
 
   return (
-    <main className="flex-1 flex justify-center items-center px-5 xs:px-9 pt-9">
+    <main className="flex-1 flex justify-center items-center px-5 xs:px-9 py-9">
       {(error || (books.length < 1 && !isLoading)) && <NoData message="No data" />}
       {isLoading && <SpinnerIcon className="w-24 h-24 fill-teal-400" />}
       {!error && books.length > 0 && !isLoading && (

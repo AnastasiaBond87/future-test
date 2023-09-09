@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '@/components/Header';
+import Footer from '../../components/Footer';
 
 export default function RootLayout() {
   const { pathname } = useLocation();
@@ -8,7 +9,7 @@ export default function RootLayout() {
     <>
       {pathname !== '/page-not-found' && <Header />}
       <Outlet />
-      <footer />
+      <Footer />
     </>
   );
 }
