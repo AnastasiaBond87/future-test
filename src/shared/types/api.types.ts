@@ -7,6 +7,7 @@ interface IBook {
     title: string;
     authors: string[];
     categories: string[];
+    description: string;
     publisher: string;
     publishedDate: string;
     readingModes: {

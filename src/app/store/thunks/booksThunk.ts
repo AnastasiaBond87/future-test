@@ -30,4 +30,16 @@ const fetchBooks = createAsyncThunk(
   }
 );
 
-export { fetchBooks };
+const fetchBookById = createAsyncThunk(
+  'books/fetchBookByIdStatus',
+  async (bookId: string, { rejectWithValue }) => {
+    return axios
+      .get(`${URL}/${bookId}?key=${KEY}`)
+      .then((res) => res.data)
+      .catch((err: AxiosError) => {
+        return rejectWithValue(err.response?.data);
+      });
+  }
+);
+
+export { fetchBooks, fetchBookById };

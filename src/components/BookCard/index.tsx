@@ -1,15 +1,27 @@
 import { IBook } from '@/shared/types/api.types';
 import ImageIcon from '@/shared/ui/Icons/ImageIcon';
+import { useNavigate } from 'react-router-dom';
 
 interface IProps {
   book: IBook;
 }
 
 export default function BookItem({ book }: IProps) {
-  const { title, categories, authors, imageLinks } = book.volumeInfo;
+  const navigate = useNavigate();
+  const {
+    id,
+    volumeInfo: { title, categories, authors, imageLinks },
+  } = book;
+
+  const handleClick = (): void => {
+    navigate(`/books/${id}`);
+  };
 
   return (
-    <li className="bg-neutral-100 p-10 flex flex-col justify-between shadow-md border cursor-pointer">
+    <li
+      className="bg-neutral-100 p-10 flex flex-col justify-between shadow-md border cursor-pointer"
+      onClick={handleClick}
+    >
       {imageLinks && imageLinks.thumbnail ? (
         <div className="shadow-[4px_6px_8px_0px_rgba(34,60,80,0.2)] mb-6 w-28 self-center">
           <img alt={title} src={imageLinks.thumbnail} className="max-w-full" />

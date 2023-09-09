@@ -9,8 +9,10 @@ import {
   setStartIndex,
 } from '@/app/store/slices/queryParamsSlice';
 import { fetchBooks } from '@/app/store/thunks/booksThunk';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { orderBy, category } = useAppSelector((store) => store.params);
 
@@ -26,6 +28,7 @@ export default function Header() {
     dispatch(setQuery(value));
     dispatch(setStartIndex(0));
     dispatch(fetchBooks());
+    navigate('/');
   };
 
   return (
