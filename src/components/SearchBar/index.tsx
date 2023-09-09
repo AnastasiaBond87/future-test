@@ -2,17 +2,31 @@ import Input from '@/shared/ui/Input';
 import { ChangeEventHandler, FormEventHandler } from 'react';
 import Button from '@/shared/ui/Button';
 import SearchIcon from '@/shared/ui/Icons/SearchIcon';
+import IconButton from '../../shared/ui/IconButton';
+import ClearIcon from '../../shared/ui/Icons/ClearIcon';
 
 interface IProps {
   onSubmit: () => void;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  setValue: (value: string) => void;
   value: string;
 }
 
-export default function SearchBar({ onSubmit, onChange, value }: IProps) {
+export default function SearchBar({ onSubmit, setValue, value }: IProps) {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    onSubmit();
+
+    if (value.trim()) {
+      onSubmit();
+    }
+  };
+
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const { value } = event.target;
+    setValue(value);
+  };
+
+  const clearInput = (): void => {
+    setValue('');
   };
 
   return (
@@ -21,13 +35,21 @@ export default function SearchBar({ onSubmit, onChange, value }: IProps) {
       onSubmit={handleSubmit}
     >
       <div className="flex-1 relative flex items-center">
+        <SearchIcon className="absolute left-2 h-5 w-5 text-neutral-400" />
         <Input
           value={value}
-          onChange={onChange}
-          className="w-full h-full pr-9"
+          onChange={handleChange}
+          className="w-full h-full px-9"
           placeholder="Search..."
         />
-        <SearchIcon className="absolute right-2 h-5 w-5 text-neutral-400" />
+        {value.trim() && (
+          <IconButton
+            icon={<ClearIcon />}
+            size="sm"
+            className="absolute right-2"
+            onClick={clearInput}
+          />
+        )}
       </div>
       <Button type="submit" size="md">
         Search
