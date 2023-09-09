@@ -3,13 +3,15 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 interface IState {
   query: string;
   category: string;
-  sorting: string;
+  orderBy: string;
+  startIndex: number;
 }
 
 const initialState: IState = {
   query: '',
   category: 'all',
-  sorting: 'relevance',
+  orderBy: 'relevance',
+  startIndex: 0,
 };
 
 const queryParamsSlice = createSlice({
@@ -23,10 +25,13 @@ const queryParamsSlice = createSlice({
       state.category = action.payload;
     },
     setSorting(state, action: PayloadAction<string>) {
-      state.sorting = action.payload;
+      state.orderBy = action.payload;
+    },
+    setStartIndex(state, action: PayloadAction<number>) {
+      state.startIndex = action.payload;
     },
   },
 });
 
-export const { setCategory, setSorting, setQuery } = queryParamsSlice.actions;
+export const { setCategory, setSorting, setQuery, setStartIndex } = queryParamsSlice.actions;
 export default queryParamsSlice;

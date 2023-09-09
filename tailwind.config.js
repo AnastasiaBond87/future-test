@@ -6,6 +6,9 @@ export default {
       screens: {
         xs: '500px',
       },
+      fontFamily: {
+        'roboto-condensed': ['Roboto Condensed', 'sans-serif'],
+      },
     },
   },
   plugins: [],

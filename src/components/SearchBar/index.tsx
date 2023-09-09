@@ -1,23 +1,18 @@
 import Input from '@/shared/ui/Input';
-import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import { ChangeEventHandler, FormEventHandler } from 'react';
 import Button from '@/shared/ui/Button';
 import SearchIcon from '@/shared/ui/Icons/SearchIcon';
 
 interface IProps {
-  onSubmit: (value: string) => void;
+  onSubmit: () => void;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  value: string;
 }
 
-export default function SearchBar({ onSubmit }: IProps) {
-  const [value, setValue] = useState('');
-
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    const { value } = event.target;
-    setValue(value);
-  };
-
+export default function SearchBar({ onSubmit, onChange, value }: IProps) {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    onSubmit(value);
+    onSubmit();
   };
 
   return (
@@ -26,7 +21,12 @@ export default function SearchBar({ onSubmit }: IProps) {
       onSubmit={handleSubmit}
     >
       <div className="flex-1 relative flex items-center">
-        <Input value={value} onChange={handleChange} className="w-full h-full pr-9" />
+        <Input
+          value={value}
+          onChange={onChange}
+          className="w-full h-full pr-9"
+          placeholder="Search..."
+        />
         <SearchIcon className="absolute right-2 h-5 w-5 text-neutral-400" />
       </div>
       <Button type="submit" size="md">

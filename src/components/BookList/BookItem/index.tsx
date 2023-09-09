@@ -1,9 +1,10 @@
 import { IBook } from '@/shared/types/api.types';
-import ImageIcon from '../../../shared/ui/Icons/ImageIcon';
+import ImageIcon from '@/shared/ui/Icons/ImageIcon';
 
 interface IProps {
   book: IBook;
 }
+
 export default function BookItem({ book }: IProps) {
   const { title, categories, authors, imageLinks } = book.volumeInfo;
 

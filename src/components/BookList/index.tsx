@@ -1,5 +1,5 @@
-import { IBook } from '../../shared/types/api.types';
-import BookItem from './BookItem';
+import { IBook } from '@/shared/types/api.types';
+import BookItem from '@/components/BookList/BookItem';
 
 interface IProps {
   books: IBook[];

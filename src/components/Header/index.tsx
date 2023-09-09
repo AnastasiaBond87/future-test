@@ -3,10 +3,12 @@ import Select from '@/shared/ui/Select';
 import SearchBar from '@/components/SearchBar';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { setSorting, setCategory, setQuery } from '@/app/store/slices/queryParamsSlice';
+import { ChangeEventHandler } from 'react';
+import { fetchBooks } from '@/app/store/thunks/booksThunk';
 
 export default function Header() {
   const dispatch = useAppDispatch();
-  const { sorting, category } = useAppSelector((store) => store.params);
+  const { orderBy, category, query } = useAppSelector((store) => store.params);
 
   const selectSorting = (value: string): void => {
     dispatch(setSorting(value));
@@ -16,18 +18,22 @@ export default function Header() {
     dispatch(setCategory(value));
   };
 
-  const handleRequest = (value: string): void => {
-    if (value) {
-      dispatch(setQuery(value));
-    }
+  const handleRequest = (): void => {
+    dispatch(fetchBooks());
+  };
+
+  const handleSearchChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const { value } = event.target;
+    dispatch(setQuery(value));
   };
 
   return (
     <header className="bg-black bg-[url('assets/images/header-cover.jpg')] bg-cover">
       <div className="w-full h-full bg-black/50 py-6 flex justify-center">
         <div className="flex flex-col items-center justify-center gap-12 w-[600px] max-w-full px-5 xs:px-9">
-          <SearchBar onSubmit={handleRequest} />
-          <div className="flex w-full gap-3 max-w-full">
+          <h2 className="text-white uppercase font-bold text-3xl">Search for books</h2>
+          <SearchBar onSubmit={handleRequest} value={query} onChange={handleSearchChange} />
+          <div className="flex justify-center w-full gap-3 max-w-full">
             <Select
               options={categories}
               value={category}
@@ -38,7 +44,7 @@ export default function Header() {
             />
             <Select
               options={sortBy}
-              value={sorting}
+              value={orderBy}
               setValue={selectSorting}
               id="sort-select"
               label="sorted by"

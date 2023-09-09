@@ -5,15 +5,23 @@ interface IProps {
   value: string;
   onChange: InputHTMLAttributes<HTMLInputElement>['onChange'];
   className?: string;
+  placeholder: InputHTMLAttributes<HTMLInputElement>['placeholder'];
 }
 
-export default function Input({ type = 'text', value, onChange, className = '' }: IProps) {
+export default function Input({
+  type = 'text',
+  value,
+  onChange,
+  className = '',
+  placeholder,
+}: IProps) {
   return (
     <input
+      placeholder={placeholder}
       type={type}
       value={value}
       onChange={onChange}
-      className={`${className} rounded-sm px-2 py-1 focus:outline-none border-2 focus:border-teal-400`}
+      className={`${className} text-base rounded-sm px-3 py-2 focus:outline-none border-2 focus:border-teal-400 placeholder:italic`}
     />
   );
 }

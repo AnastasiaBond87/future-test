@@ -6,10 +6,11 @@ const booksApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_URL }),
   endpoints: (builder) => ({
     getBooks: builder.query<IBooksResponse, IQueryParams>({
-      query: ({ q }) => ({
+      query: ({ q, orderBy }) => ({
         url: 'volumes/',
         params: {
           q,
+          orderBy,
           key: import.meta.env.VITE_API_KEY,
         },
       }),

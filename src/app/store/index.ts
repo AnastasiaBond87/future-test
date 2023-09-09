@@ -1,15 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import queryParamsSlice from '@/app/store/slices/queryParamsSlice';
-import booksApi from '@/app/store/api/booksApi';
+import booksSlice from '@/app/store/slices/booksSlice';
 
 const reducer = combineReducers({
   [queryParamsSlice.name]: queryParamsSlice.reducer,
-  [booksApi.reducerPath]: booksApi.reducer,
+  [booksSlice.name]: booksSlice.reducer,
 });
 
 const store = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([booksApi.middleware]),
 });
 
 export type AppState = ReturnType<typeof store.getState>;

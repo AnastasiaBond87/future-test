@@ -1,36 +1,38 @@
-import { useLazyGetBooksQuery } from '@/app/store/api/booksApi';
 import { useEffect } from 'react';
-import { useAppSelector } from '@/app/store/hooks';
-import { IError } from '../../shared/types/api.types';
 import { toast } from 'react-toastify';
 import NoData from '@/components/NoData';
-import SpinnerIcon from '../../shared/ui/Icons/SpinnerIcon';
-import BookList from '../../components/BookList';
+import SpinnerIcon from '@/shared/ui/Icons/SpinnerIcon';
+import BookList from '@/components/BookList';
+import Books from '@/components/Books';
+import { useAppSelector } from '../../app/store/hooks';
+import { IError } from '../../shared/types/api.types';
 
 export default function HomeView() {
-  const { query } = useAppSelector((store) => store.params);
-  const [trigger, { data, error, isFetching }] = useLazyGetBooksQuery();
+  const { isLoading, error, books, totalItems } = useAppSelector((store) => store.books);
 
   useEffect(() => {
     if (error) {
-      if ('data' in error) {
-        const errData = error.data as IError;
-        toast.error(errData.error.message);
+      const err = error as IError;
+
+      if (err.error.message) {
+        toast.error(err.error.message);
       } else {
         toast.error('UNKNOWN ERROR');
       }
     }
-  }, [data, error]);
-
-  useEffect(() => {
-    if (query) trigger({ q: query });
-  }, [query, trigger]);
+  }, [error]);
 
   return (
     <main className="flex-1 flex justify-center items-center px-5 xs:px-9 py-5">
-      {((!data && !isFetching) || (data && data.totalItems === 0 && !isFetching)) && <NoData />}
-      {isFetching && <SpinnerIcon className="w-24 h-24 fill-teal-400" />}
-      {data && data.totalItems > 0 && !isFetching && <BookList books={data.items} />}
+      {(error ||
+        (books.length < 1 && !isLoading) ||
+        (books.length > 0 && totalItems === 0 && !isLoading)) && <NoData />}
+      {isLoading && <SpinnerIcon className="w-24 h-24 fill-teal-400" />}
+      {!error && totalItems && totalItems > 0 && !isLoading && (
+        <Books totalItems={totalItems}>
+          <BookList books={books} />
+        </Books>
+      )}
     </main>
   );
 }

@@ -79,6 +79,7 @@ interface IError {
 
 interface IQueryParams {
   q: string;
+  orderBy: string;
 }
 
 export type { IBooksResponse, IBook, IError, IQueryParams };
