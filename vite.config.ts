@@ -25,7 +25,7 @@ export default defineConfig({
       all: true,
       provider: 'v8',
       exclude: ['src/shared/ui/Icons'],
-      include: ['src/**/*'],
+      include: ['src/components', 'src/shared/ui', 'src/views'],
     },
   },
 });

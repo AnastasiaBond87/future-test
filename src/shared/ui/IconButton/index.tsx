@@ -6,9 +6,17 @@ interface IProps {
   className?: string;
   size: 'sm' | 'md' | 'lg';
   onClick?: () => void;
+  dataTestId?: string;
 }
 
-export default function IconButton({ type = 'button', icon, className, size, onClick }: IProps) {
+export default function IconButton({
+  type = 'button',
+  icon,
+  className,
+  size,
+  onClick,
+  dataTestId,
+}: IProps) {
   const classList = {
     sm: 'w-6 h-6',
     md: 'w-8 h-8',
@@ -16,6 +24,7 @@ export default function IconButton({ type = 'button', icon, className, size, onC
   };
   return (
     <button
+      data-testid={dataTestId}
       onClick={onClick}
       type={type}
       className={`${className} ${classList[size]} rounded-sm text-neutral-400 hover:text-neutral-500 duration-300`}

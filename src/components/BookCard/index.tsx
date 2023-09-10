@@ -8,6 +8,7 @@ interface IProps {
 
 export default function BookItem({ book }: IProps) {
   const navigate = useNavigate();
+
   const {
     id,
     volumeInfo: { title, categories, authors, imageLinks },
@@ -24,7 +25,12 @@ export default function BookItem({ book }: IProps) {
     >
       {imageLinks && imageLinks.thumbnail ? (
         <div className="shadow-[4px_6px_8px_0px_rgba(34,60,80,0.2)] mb-6 w-28 self-center">
-          <img alt={title} src={imageLinks.thumbnail} className="max-w-full" />
+          <img
+            alt={title}
+            src={imageLinks.thumbnail}
+            className="max-w-full"
+            data-testid="card-image"
+          />
         </div>
       ) : (
         <div className="min-w-full flex justify-center">

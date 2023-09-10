@@ -27,35 +27,36 @@ export default function Select({ options, value, setValue, id, label, className 
         {label}:
       </label>
       <div
+        data-testid="select-btn"
         id={id}
         ref={ref}
         onClick={() => setOpen(!isOpen)}
         className={`h-8 py-1 px-2 bg-white rounded-sm flex items-center justify-between cursor-pointer ${className}`}
       >
-        <span className="text-base capitalize">{value}</span>
+        <span className="text-base capitalize" data-testid="select-value">
+          {value}
+        </span>
         <ArrowDownIcon
           className={`h-6 w-6 text-neutral-400 ${isOpen ? 'rotate-180' : ''} duration-150`}
         />
       </div>
-      <div
-        className={`absolute z-10 ${
-          isOpen ? 'h-auto' : 'h-0'
-        } overflow-hidden bg-black/80 w-full rounded-sm`}
-      >
-        <ul className="flex flex-col py-1">
-          {options.map((option) => (
-            <li
-              key={option}
-              onClick={() => handleOptionClick(option)}
-              className={`py-1 px-2 text-base capitalize cursor-pointer duration-300 ${
-                value === option ? 'text-teal-400' : 'text-white hover:bg-white/20'
-              }`}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {isOpen && (
+        <div className={`absolute z-10  bg-black/80 w-full rounded-sm`}>
+          <ul className="flex flex-col py-1">
+            {options.map((option) => (
+              <li
+                key={option}
+                onClick={() => handleOptionClick(option)}
+                className={`py-1 px-2 text-base capitalize cursor-pointer duration-300 ${
+                  value === option ? 'text-teal-400' : 'text-white hover:bg-white/20'
+                }`}
+              >
+                {option}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

@@ -7,7 +7,7 @@ export default function BookDetails({ volumeInfo }: TProps) {
   const { title, categories, description, authors, imageLinks } = volumeInfo;
 
   return (
-    <div className="self-stretch flex w-full flex-col md:flex-row">
+    <div className="self-stretch flex w-full flex-col md:flex-row" data-testid="book-details">
       <div className="bg-neutral-100 grow-0 shrink-0 basis-1/3 px-5 xs:px-9 py-9 flex justify-center items-start">
         {imageLinks && imageLinks.small ? (
           <div className="shadow-[4px_6px_8px_0px_rgba(34,60,80,0.2)] w-[21rem]">

@@ -33,6 +33,7 @@ export default function SearchBar({ onSubmit }: IProps) {
     <form
       className="w-full flex items-stretch p-3 bg-white/30 rounded-sm gap-2"
       onSubmit={handleSubmit}
+      data-testid="search-bar"
     >
       <div className="flex-1 relative flex items-center">
         <SearchIcon className="absolute left-2 h-5 w-5 text-neutral-400" />
@@ -48,6 +49,7 @@ export default function SearchBar({ onSubmit }: IProps) {
             size="sm"
             className="absolute right-2"
             onClick={clearInput}
+            dataTestId="clear-btn"
           />
         )}
       </div>
