@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
-import { AppState } from '@/app/store';
+import { RootStore } from '@/app/store';
 import { setBooks, setLoading } from '@/app/store/slices/booksSlice';
 
 const URL = import.meta.env.VITE_URL;
@@ -10,7 +10,7 @@ const KEY = import.meta.env.VITE_API_KEY;
 const fetchBooks = createAsyncThunk(
   'books/fetchBooksStatus',
   async (_, { rejectWithValue, getState, dispatch }) => {
-    const { params } = getState() as AppState;
+    const { params } = getState() as RootStore;
     const { orderBy, startIndex, query, category } = params;
     const subject = category !== 'all' ? category : '';
 
