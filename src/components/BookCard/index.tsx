@@ -22,6 +22,7 @@ export default function BookItem({ book }: IProps) {
     <li
       className="bg-neutral-100 p-10 flex flex-col justify-between shadow-md border cursor-pointer"
       onClick={handleClick}
+      data-testid="book-card"
     >
       {imageLinks && imageLinks.thumbnail ? (
         <div className="shadow-[4px_6px_8px_0px_rgba(34,60,80,0.2)] mb-6 w-28 self-center">

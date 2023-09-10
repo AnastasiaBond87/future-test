@@ -18,7 +18,7 @@ export default function HomeView() {
   return (
     <main className="flex-1 flex justify-center items-center px-5 xs:px-9 py-9">
       {(error || (books.length < 1 && !isLoading)) && <NoData message="No data" />}
-      {isLoading && <SpinnerIcon className="w-24 h-24 fill-teal-400" />}
+      {isLoading && <SpinnerIcon className="w-24 h-24 fill-teal-400" dataTestId="" />}
       {!error && books.length > 0 && !isLoading && (
         <Books totalItems={totalItems}>
           <BookList books={books} />

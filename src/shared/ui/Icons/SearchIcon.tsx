@@ -1,8 +1,9 @@
 interface IProps {
   className?: string;
+  dataTestId?: string;
 }
 
-export default function SearchIcon({ className = '' }: IProps) {
+export default function SearchIcon({ className = '', dataTestId }: IProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,6 +12,7 @@ export default function SearchIcon({ className = '' }: IProps) {
       strokeWidth={1.5}
       stroke="currentColor"
       className={className}
+      data-testid={dataTestId}
     >
       <path
         strokeLinecap="round"
