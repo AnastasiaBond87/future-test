@@ -19,7 +19,4 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
-  globals: {
-    'expect': true,
-  }
 }
