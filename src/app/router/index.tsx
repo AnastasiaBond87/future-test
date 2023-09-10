@@ -8,9 +8,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<HomeView />} />
-      <Route path="books/:id" element={<BookView />} />
-      <Route path="page-not-found" element={<NotFoundView />} />
-      <Route path="*" element={<Navigate to="page-not-found" />} />
+      <Route path="/books/:id" element={<BookView />} />
+      <Route path="/page-not-found" element={<NotFoundView />} />
+      <Route path="*" element={<Navigate to="/page-not-found" />} />
     </Route>
   )
 );
